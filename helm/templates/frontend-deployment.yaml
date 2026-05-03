@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: itemsapi-frontend-deployment
+  namespace: {{.Values.namespace}}
+spec:
+  replicas: {{.Values.frontend.replicaCount}}
+  selector:
+    matchLabels:
+      app: itemsapi-frontend
+  template:
+    metadata:
+      labels:
+        app: itemsapi-frontend
+    spec:
+      containers:
+        - name: itemsapi-frontend
+          image: {{.Values.frontend.image}}
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

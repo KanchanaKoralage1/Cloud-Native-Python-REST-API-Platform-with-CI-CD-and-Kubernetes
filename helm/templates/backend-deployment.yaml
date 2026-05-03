@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: itemsapi-backend-deployment
+  namespace: {{.Values.namespace}}
+spec:
+  replicas: {{.Values.backend.replicaCount}}
+  selector:
+    matchLabels:
+      app: itemsapi-backend
+  template:
+    metadata:
+      labels:
+        app: itemsapi-backend
+    spec:
+      containers:
+        - name: itemsapi-backend
+          image: {{.Values.backend.image}}
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
