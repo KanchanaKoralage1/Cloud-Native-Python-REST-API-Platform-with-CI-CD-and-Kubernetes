@@ -1,13 +1,15 @@
 namespace: itemsapi-v2
 
 backend:
-  image: kanchana20/itemsapi-backend:v3
+  repository: kanchana20/itemsapi-backend
+  tag: latest
   replicaCount: 1
   servicePort: 8000
   nodePort: 30096
 
 frontend:
-  image: kanchana20/itemsapi-frontend:v2
+  repository: kanchana20/itemsapi-frontend
+  tag: latest
   replicaCount: 1
   servicePort: 80
   nodePort: 30097

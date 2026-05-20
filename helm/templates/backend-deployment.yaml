@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: itemsapi-backend
-          image: {{.Values.backend.image}}
+          image: {{.Values.backend.repository}}:{{.Values.backend.tag}}
           ports:
             - containerPort: 8000
           resources:
