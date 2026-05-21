@@ -24,7 +24,7 @@ build_backend:
     - docker push $BACKEND_IMAGE:$CI_PIPELINE_ID
 
   only:
-    - development
+    - main
 
 
 # FRONTEND IMAGE BUILD
@@ -45,4 +45,4 @@ build_frontend:
     - docker push $FRONTEND_IMAGE:$CI_PIPELINE_ID
 
   only:
-    - development
+    - main
