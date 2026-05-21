@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Items Tables</title>
+</head>
+<body>
+
+    <h2>Items List</h2>
+
+    <table border="1" id="itemsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Created At</th>
+                <th>Expire At</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchItems() {
+            const response = await fetch("/items");
+            const data = await response.json();
+
+            const tableBody = document.querySelector("#itemsTable tbody");
+
+            tableBody.innerHTML = "";
+
+            data.forEach(item => {
+                const row = `
+                    <tr>
+                        <td>${item.id}</td>
+                        <td>${item.name}</td>
+                        <td>${item.description || ""}</td>
+                        <td>${item.price}</td>
+                        <td>${item.created_at}</td>
+                        <td>${item.expire_at}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        fetchItems();
+    </script>
+
+</body>
+</html>
