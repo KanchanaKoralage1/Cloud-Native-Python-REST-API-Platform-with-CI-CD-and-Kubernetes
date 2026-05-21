@@ -1,14 +1,12 @@
 stages:
   - build
-  - deploy
 
 variables:
   BACKEND_IMAGE: kanchana20/itemsapi-backend
   FRONTEND_IMAGE: kanchana20/itemsapi-frontend
 
-# ====================================
+
 # BACKEND IMAGE BUILD
-# ====================================
 
 build_backend:
   stage: build
@@ -28,9 +26,8 @@ build_backend:
   only:
     - development
 
-# ====================================
+
 # FRONTEND IMAGE BUILD
-# ====================================
 
 build_frontend:
   stage: build
@@ -46,30 +43,6 @@ build_frontend:
   script:
     - docker build -t $FRONTEND_IMAGE:$CI_PIPELINE_ID ./apps/frontend
     - docker push $FRONTEND_IMAGE:$CI_PIPELINE_ID
-
-  only:
-    - development
-
-# ====================================
-# DEPLOY TO KUBERNETES
-# ====================================
-
-deploy:
-  stage: deploy
-
-  image:
-    name: alpine/helm:3.14.0
-    entrypoint: [""]
-
-  before_script:
-    - apk add --no-cache kubectl bash
-
-  script:
-    - sed -i "s/tag: latest/tag: $CI_PIPELINE_ID/g" helm/values.yaml
-
-    - helm upgrade --install itemsapi ./helm \
-        --namespace itemsapi-v2 \
-        --create-namespace
 
   only:
     - development
