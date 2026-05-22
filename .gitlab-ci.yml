@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 
 variables:
   BACKEND_IMAGE: kanchana20/itemsapi-backend
@@ -43,6 +44,21 @@ build_frontend:
   script:
     - docker build -t $FRONTEND_IMAGE:$CI_PIPELINE_ID ./apps/frontend
     - docker push $FRONTEND_IMAGE:$CI_PIPELINE_ID
+
+  only:
+    - main
+  
+
+  # DEPLOY TO MINIKUBE
+
+  deploy:
+  stage: deploy
+
+  tags:
+    - minikube
+
+  script:
+    - helm upgrade --install itemsapi ./helm --namespace itemsapi-v2 --create-namespace --set backend.image=$BACKEND_IMAGE:$CI_PIPELINE_ID --set frontend.image=$FRONTEND_IMAGE:$CI_PIPELINE_ID
 
   only:
     - main

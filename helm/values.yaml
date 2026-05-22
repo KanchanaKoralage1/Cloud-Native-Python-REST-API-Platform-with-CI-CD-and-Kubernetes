@@ -2,14 +2,14 @@ namespace: itemsapi-v2
 
 backend:
   repository: kanchana20/itemsapi-backend
-  tag: latest
+  tag: "2544227757"
   replicaCount: 1
   servicePort: 8000
   nodePort: 30096
 
 frontend:
   repository: kanchana20/itemsapi-frontend
-  tag: latest
+  tag: "2544227757"
   replicaCount: 1
   servicePort: 80
   nodePort: 30097
