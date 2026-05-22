@@ -6,8 +6,9 @@ variables:
   BACKEND_IMAGE: kanchana20/itemsapi-backend
   FRONTEND_IMAGE: kanchana20/itemsapi-frontend
 
-
+# ====================================
 # BUILD BACKEND
+# ====================================
 
 build_backend:
   stage: build
@@ -27,8 +28,9 @@ build_backend:
   only:
     - main
 
-
+# ====================================
 # BUILD FRONTEND
+# ====================================
 
 build_frontend:
   stage: build
@@ -48,8 +50,9 @@ build_frontend:
   only:
     - main
 
-
+# ====================================
 # DEPLOY TO MINIKUBE
+# ====================================
 
 deploy:
   stage: deploy
