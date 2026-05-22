@@ -16,6 +16,7 @@ spec:
       containers:
         - name: itemsapi-frontend
           image: {{.Values.frontend.repository}}:{{.Values.frontend.tag}}
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           resources:
