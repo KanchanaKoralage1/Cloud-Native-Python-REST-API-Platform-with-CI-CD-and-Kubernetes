@@ -7,7 +7,7 @@ variables:
   FRONTEND_IMAGE: kanchana20/itemsapi-frontend
 
 
-# BACKEND IMAGE BUILD
+# BUILD BACKEND
 
 build_backend:
   stage: build
@@ -28,7 +28,7 @@ build_backend:
     - main
 
 
-# FRONTEND IMAGE BUILD
+# BUILD FRONTEND
 
 build_frontend:
   stage: build
@@ -47,18 +47,18 @@ build_frontend:
 
   only:
     - main
-  
 
-  # DEPLOY TO MINIKUBE
 
-  deploy:
-    stage: deploy
+# DEPLOY TO MINIKUBE
 
-    tags:
-      - minikube
+deploy:
+  stage: deploy
 
-    script:
-      - helm upgrade --install itemsapi ./helm --namespace itemsapi-v2 --create-namespace --set backend.image=$BACKEND_IMAGE:$CI_PIPELINE_ID --set frontend.image=$FRONTEND_IMAGE:$CI_PIPELINE_ID
+  tags:
+    - minikube
 
-    only:
-      - main
+  script:
+    - helm upgrade --install itemsapi ./helm --namespace itemsapi-v2 --create-namespace --set backend.image=$BACKEND_IMAGE:$CI_PIPELINE_ID --set frontend.image=$FRONTEND_IMAGE:$CI_PIPELINE_ID
+
+  only:
+    - main
