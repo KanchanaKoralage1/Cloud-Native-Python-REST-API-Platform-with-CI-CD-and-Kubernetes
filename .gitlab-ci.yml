@@ -59,7 +59,7 @@ deploy:
   tags:
     - minikube
   script:
-    - helm upgrade --install itemsapi ./helm --namespace itemsapi-v2 --create-namespace --set backend.tag="${env:CI_PIPELINE_ID}" --set frontend.tag="${env:CI_PIPELINE_ID}"
+    - helm upgrade --install itemsapi ./helm --namespace itemsapi-v2 --create-namespace --set backend.tag="$env:CI_PIPELINE_ID" --set frontend.tag="$env:CI_PIPELINE_ID"
   only:
     - main
   needs:
