@@ -56,17 +56,12 @@ build_frontend:
 
 deploy:
   stage: deploy
-
   tags:
     - minikube
-
   script:
-    - |
-      helm upgrade --install itemsapi ./helm `
-      --namespace itemsapi-v2 `
-      --create-namespace `
-      --set backend.image="${BACKEND_IMAGE}:${CI_PIPELINE_ID}" `
-      --set frontend.image="${FRONTEND_IMAGE}:${CI_PIPELINE_ID}"
-
+    - helm upgrade --install itemsapi ./helm --namespace itemsapi-v2 --create-namespace --set backend.image="${env:BACKEND_IMAGE}:${env:CI_PIPELINE_ID}" --set frontend.image="${env:FRONTEND_IMAGE}:${env:CI_PIPELINE_ID}"
   only:
     - main
+  needs:
+    - build_backend
+    - build_frontend
